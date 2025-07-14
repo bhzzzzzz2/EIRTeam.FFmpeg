@@ -19,21 +19,25 @@ jobs:
     name: 🏁 Windows Debug
     uses: ./.github/workflows/windows_builds.yml
     with:
+      artifact-name: windows_template_debug
       target: template_debug
   windows-build-release:
     name: 🏁 Windows Release
     uses: ./.github/workflows/windows_builds.yml
     with:
+      artifact-name: windows_template_release
       target: template_release
   linux-build-debug:
     name: 🐧 Linux Debug
     uses: ./.github/workflows/linux_builds.yml
     with:
+      artifact-name: linux_template_debug
       target: template_debug
   linux-build-release:
     name: 🐧 Linux Release
     uses: ./.github/workflows/linux_builds.yml
     with:
+      artifact-name: linux_template_release
       target: template_release
   static-checks:
     name: 📊 Static checks
