@@ -21,27 +21,32 @@ jobs:
     with:
       artifact-name: windows_template_debug
       target: template_debug
+
   windows-build-release:
     name: 🏁 Windows Release
     uses: ./.github/workflows/windows_builds.yml
     with:
       artifact-name: windows_template_release
       target: template_release
+
   linux-build-debug:
     name: 🐧 Linux Debug
     uses: ./.github/workflows/linux_builds.yml
     with:
       artifact-name: linux_template_debug
       target: template_debug
+
   linux-build-release:
     name: 🐧 Linux Release
     uses: ./.github/workflows/linux_builds.yml
     with:
       artifact-name: linux_template_release
       target: template_release
+
   static-checks:
     name: 📊 Static checks
     uses: ./.github/workflows/static_checks.yml
+
   publish_release:
     name: Publish release
     needs: [windows-build-debug, windows-build-release, linux-build-release, linux-build-debug]
@@ -49,15 +54,18 @@ jobs:
     if: github.event.inputs.doRelease
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: artifacts
           path: artifacts_windows
+
       - name: Calculate short sha
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Create release
         id: create_release
         run: |
